@@ -19,6 +19,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
+import android.util.Log;
 import java.util.Map;
 
 import android.content.ActivityNotFoundException;
@@ -35,6 +36,7 @@ import android.webkit.CookieManager;
 import android.webkit.DownloadListener;
 import android.webkit.GeolocationPermissions;
 import android.webkit.JavascriptInterface;
+import android.webkit.PermissionRequest;
 import android.webkit.URLUtil;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -391,6 +393,11 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
         return true;
       }
 
+      @Override
+      public void onPermissionRequest(final PermissionRequest request) {
+        Log.d("RNCWebViewManager", "onPermissionRequest custom");
+        request.grant(request.getResources());
+      }
 
     @Override
     public void onProgressChanged(WebView webView, int newProgress) {
