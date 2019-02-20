@@ -59,6 +59,9 @@ import com.reactnativecommunity.webview.events.TopLoadingProgressEvent;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.webkit.PermissionRequest;
+import android.util.Log;
+
 /**
  * Manages instances of {@link WebView}
  *
@@ -423,6 +426,12 @@ public class RNCWebViewManager extends SimpleViewManager<WebView> {
                       webView.getId(),
                       event));
     }
+
+        @Override
+        public void onPermissionRequest(final PermissionRequest request) {
+            Log.d("RNCWebViewManager", "onPermissionRequest custom");
+            request.grant(request.getResources());
+        }
 
       @Override
       public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
